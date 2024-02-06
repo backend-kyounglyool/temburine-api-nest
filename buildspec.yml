@@ -1,0 +1,28 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+    commands:
+      - npm install
+
+  build:
+    commands:
+      - npm install -g npm@9
+      - npm install
+      - npm run build
+      - npm run migrate
+
+artifacts:
+  files:
+    - dist/**/*
+    - prisma/**/*
+    - .npmrc
+    - package-lock.json
+    - package.json
+    - .platform/**/*
+
+cache:
+  paths:
+    - node_modules/**/*
