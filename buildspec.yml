@@ -17,6 +17,7 @@ artifacts:
     - dist/**/*
     - prisma/**/*
     - .npmrc
+    - Procfile
     - package-lock.json
     - package.json
     - .platform/**/*
