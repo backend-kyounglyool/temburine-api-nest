@@ -3,13 +3,13 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 18
+      nodejs: 16
     commands:
       - npm install
 
   build:
     commands:
-      - npm install -g npm
+      - npm install -g npm@9
       - npm install
       - npm run build
       - npm run migrate
