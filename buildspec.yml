@@ -9,6 +9,8 @@ phases:
 
   build:
     commands:
+      - npm install -g npm@9
+      - npm install
       - npm run build
       - npm run migrate
 
@@ -17,7 +19,6 @@ artifacts:
     - dist/**/*
     - prisma/**/*
     - .npmrc
-    - Procfile
     - package-lock.json
     - package.json
     - .platform/**/*
