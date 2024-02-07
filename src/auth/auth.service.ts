@@ -4,6 +4,7 @@ import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
 import { User } from "@prisma/client";
 import { firstValueFrom } from "rxjs";
+import { UsersService } from "../users/users.service";
 
 @Injectable()
 export class AuthService {
