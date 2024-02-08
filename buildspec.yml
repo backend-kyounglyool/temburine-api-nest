@@ -22,7 +22,6 @@ artifacts:
     - package-lock.json
     - package.json
     - .platform/**/*
-    - node_modules/**/*
 
 cache:
   paths:
