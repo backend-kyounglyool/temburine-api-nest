@@ -26,7 +26,7 @@ model Agreement {
   id                          Int      @id @default(autoincrement())
   userId                      Int      @unique @map("user_id")
   isAgreeIntervalNotification Boolean  @map("is_agree_interval_notification")
-  createdAt                   DateTime @map("created_at")
+  createdAt                   DateTime @map("created_at") @default(now())
   updatedAt                   DateTime @updatedAt
 
   user User @relation("userToAgreement", fields: [userId], references: [id])

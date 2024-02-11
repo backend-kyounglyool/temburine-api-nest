@@ -9,9 +9,10 @@ import { UsersModule } from './users/users.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { HttpModule } from '@nestjs/axios';
 import { JwtModule } from '@nestjs/jwt';
+import { AgreementModule } from './agreement/agreement.module';
 
 @Module({
-  imports: [AuthModule, UsersModule, PrismaModule, HttpModule, JwtModule],
+  imports: [AuthModule, UsersModule, PrismaModule, HttpModule, JwtModule, AgreementModule],
   controllers: [AppController, AuthController],
   providers: [AppService, AuthService, UsersService],
 })
