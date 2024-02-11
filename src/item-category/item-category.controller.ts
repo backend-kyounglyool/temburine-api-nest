@@ -21,7 +21,7 @@ import { User } from "@prisma/client";
 import { CreateItemCategoryDto } from "./dto/request/create-item-category.dto";
 import { ItemCategoryDto } from "./dto/response/item-category.dto";
 import { ItemCategoryListDto } from "./dto/response/item-category-list.dto";
-import { PagenationDto } from "../utils/pagination.dto";
+import { PaginationDto } from "../utils/pagination.dto";
 
 @Controller("item-category")
 @ApiTags("Item-Category")
@@ -64,7 +64,7 @@ export class ItemCategoryController {
   @ApiBearerAuth("auth-user")
   async getItemCategories(
     @CurrentUser() user: User,
-    @Query() dto: PagenationDto
+    @Query() dto: PaginationDto
   ): Promise<ItemCategoryListDto> {
     const { page, pageSize } = dto;
     return this.itemCategoryService.getItemCategories(user.id, page, pageSize);
