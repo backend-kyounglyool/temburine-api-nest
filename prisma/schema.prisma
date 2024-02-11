@@ -17,7 +17,8 @@ model User {
   createdAt DateTime  @default(now()) @map("created_at")
   deletedAt DateTime? @map("deleted_at")
 
-  agreement Agreement[] @relation("userToAgreement")
+  agreement    Agreement[]    @relation("userToAgreement")
+  itemCategory ItemCategory[] @relation("userToItemCategory")
 
   @@map("users")
 }
@@ -26,12 +27,24 @@ model Agreement {
   id                          Int      @id @default(autoincrement())
   userId                      Int      @unique @map("user_id")
   isAgreeIntervalNotification Boolean  @map("is_agree_interval_notification")
-  createdAt                   DateTime @map("created_at") @default(now())
+  createdAt                   DateTime @default(now()) @map("created_at")
   updatedAt                   DateTime @updatedAt
 
   user User @relation("userToAgreement", fields: [userId], references: [id])
 
   @@map("agreement")
+}
+
+model ItemCategory {
+  id           Int      @id @default(autoincrement())
+  userId       Int      @map("user_id")
+  categoryName String   @map("category_name")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt
+
+  user User @relation("userToItemCategory", fields: [userId], references: [id])
+
+  @@map("item_category")
 }
 
 enum AuthType {
