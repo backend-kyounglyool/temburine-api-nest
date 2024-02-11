@@ -1,8 +1,10 @@
 import {
   Body,
   Controller,
+  Get,
   HttpStatus,
   Post,
+  Query,
   SerializeOptions,
   UseGuards,
 } from "@nestjs/common";
@@ -18,6 +20,8 @@ import { CurrentUser } from "../utils/decorator/current-user.decorator";
 import { User } from "@prisma/client";
 import { CreateItemCategoryDto } from "./dto/request/create-item-category.dto";
 import { ItemCategoryDto } from "./dto/response/item-category.dto";
+import { ItemCategoryListDto } from "./dto/response/item-category-list.dto";
+import { PagenationDto } from "../utils/pagination.dto";
 
 @Controller("item-category")
 @ApiTags("Item-Category")
@@ -43,5 +47,26 @@ export class ItemCategoryController {
   ): Promise<ItemCategoryDto> {
     const { name } = dto;
     return this.itemCategoryService.createItemCategory(user.id, name);
+  }
+
+  @ApiOperation({
+    summary: "아이템 카테고리 조회 API",
+    description: "아이템 카테고리를 조회합니다.",
+  })
+  @ApiResponse({
+    description: "아이템 카테고리 조회 성공",
+    status: HttpStatus.OK,
+    type: ItemCategoryListDto,
+  })
+  @SerializeOptions({ type: ItemCategoryListDto })
+  @Get("users/me/item-categories")
+  @UseGuards(UserJwtGuard)
+  @ApiBearerAuth("auth-user")
+  async getItemCategories(
+    @CurrentUser() user: User,
+    @Query() dto: PagenationDto
+  ): Promise<ItemCategoryListDto> {
+    const { page, pageSize } = dto;
+    return this.itemCategoryService.getItemCategories(user.id, page, pageSize);
   }
 }
