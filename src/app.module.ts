@@ -10,9 +10,10 @@ import { PrismaModule } from './prisma/prisma.module';
 import { HttpModule } from '@nestjs/axios';
 import { JwtModule } from '@nestjs/jwt';
 import { AgreementModule } from './agreement/agreement.module';
+import { ItemCategoryModule } from './item-category/item-category.module';
 
 @Module({
-  imports: [AuthModule, UsersModule, PrismaModule, HttpModule, JwtModule, AgreementModule],
+  imports: [AuthModule, UsersModule, PrismaModule, HttpModule, JwtModule, AgreementModule, ItemCategoryModule],
   controllers: [AppController, AuthController],
   providers: [AppService, AuthService, UsersService],
 })
