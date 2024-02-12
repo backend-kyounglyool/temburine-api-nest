@@ -13,6 +13,7 @@ import {
   ApiExcludeEndpoint,
   ApiOperation,
   ApiResponse,
+  ApiTags,
 } from "@nestjs/swagger";
 import { ContentDto } from "./dto/response/content.dto";
 import { ContentRequestDto } from "./dto/request/content-request.dto";
@@ -24,6 +25,7 @@ import { User } from "@prisma/client";
 import { UserJwtGuard } from "../auth/guard/user-jwt.guard";
 
 @Controller("content")
+@ApiTags("Content")
 export class ContentController {
   constructor(private readonly contentService: ContentService) {}
 
