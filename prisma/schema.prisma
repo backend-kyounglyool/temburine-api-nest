@@ -19,6 +19,7 @@ model User {
 
   agreement    Agreement[]    @relation("userToAgreement")
   itemCategory ItemCategory[] @relation("userToItemCategory")
+  s3Content    S3Content[]    @relation("userToS3Content")
 
   @@map("users")
 }
@@ -47,6 +48,24 @@ model ItemCategory {
   @@map("item_category")
 }
 
+model S3Content {
+  id        Int          @id @default(autoincrement())
+  userId    Int          @map("user_id")
+  type      String
+  name      String
+  status    UploadStatus @default(UPLOADING)
+  createdAt DateTime     @default(now()) @map("created_at")
+
+  user User @relation("userToS3Content", fields: [userId], references: [id])
+
+  @@map("s3_content")
+}
+
 enum AuthType {
   KAKAO
+}
+
+enum UploadStatus {
+  READY
+  UPLOADING
 }
