@@ -23,7 +23,7 @@ import { ItemCategoryDto } from "./dto/response/item-category.dto";
 import { ItemCategoryListDto } from "./dto/response/item-category-list.dto";
 import { PaginationDto } from "../utils/pagination.dto";
 
-@Controller("item-category")
+@Controller()
 @ApiTags("Item-Category")
 export class ItemCategoryController {
   constructor(private readonly itemCategoryService: ItemCategoryService) {}
