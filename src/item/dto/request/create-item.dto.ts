@@ -22,6 +22,14 @@ export class CreateItemDto {
   endDate: Date;
 
   @ApiProperty({
+    description: "콘텐츠",
+    nullable: true,
+    type: Number,
+  })
+  @IsNumber()
+  contentId: number | null;
+
+  @ApiProperty({
     description: "메모",
     nullable: true,
     type: String,
