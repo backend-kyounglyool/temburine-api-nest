@@ -13,9 +13,10 @@ import { AgreementModule } from './agreement/agreement.module';
 import { ItemCategoryModule } from './item-category/item-category.module';
 import { S3Module } from './s3/s3.module';
 import { ContentModule } from './content/content.module';
+import { ItemModule } from './item/item.module';
 
 @Module({
-  imports: [AuthModule, UsersModule, PrismaModule, HttpModule, JwtModule, AgreementModule, ItemCategoryModule, S3Module, ContentModule],
+  imports: [AuthModule, UsersModule, PrismaModule, HttpModule, JwtModule, AgreementModule, ItemCategoryModule, S3Module, ContentModule, ItemModule],
   controllers: [AppController, AuthController],
   providers: [AppService, AuthService, UsersService],
 })
