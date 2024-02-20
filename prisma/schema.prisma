@@ -20,6 +20,7 @@ model User {
   agreement    Agreement[]    @relation("userToAgreement")
   itemCategory ItemCategory[] @relation("userToItemCategory")
   s3Content    S3Content[]    @relation("userToS3Content")
+  item         Item[]         @relation("userToItem")
 
   @@map("users")
 }
@@ -43,7 +44,8 @@ model ItemCategory {
   createdAt    DateTime @default(now()) @map("created_at")
   updatedAt    DateTime @updatedAt
 
-  user User @relation("userToItemCategory", fields: [userId], references: [id])
+  user User   @relation("userToItemCategory", fields: [userId], references: [id])
+  item Item[] @relation("ItemCategoryToItem")
 
   @@map("item_category")
 }
@@ -59,6 +61,24 @@ model S3Content {
   user User @relation("userToS3Content", fields: [userId], references: [id])
 
   @@map("s3_content")
+}
+
+model Item {
+  id             Int      @id @default(autoincrement())
+  userId         Int      @map("user_id")
+  itemCategoryId Int      @map("item_category_id")
+  name           String
+  startDate      DateTime @map("start_date")
+  endDate        DateTime @map("end_date")
+  comment        String?
+  interval       Int?
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  user         User         @relation("userToItem", fields: [userId], references: [id])
+  itemCategory ItemCategory @relation("ItemCategoryToItem", fields: [itemCategoryId], references: [id])
+
+  @@map("item")
 }
 
 enum AuthType {
